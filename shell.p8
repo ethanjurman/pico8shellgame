@@ -153,13 +153,14 @@ function _update60()
 			round=0
 			lives=4
 			max_shuffles = 4
+			speed=max(speed,0.2)
 		end
 		if btnp(⬆️) then
-			speed=min(speed+0.2,4.8)
+			speed=min(speed+1,5)
 			adj_speed=true
 		end
 		if btnp(⬇️) then
-			speed=max(speed-0.2,0.2)
+			speed=max(speed-1,0)
 			adj_speed=true
 		end
 	end
@@ -208,12 +209,11 @@ function _update60()
 		 state="reveal"
 		 round+=1
 		 if speed < 4 then
-		 	speed+=0.2
+		 	speed+=0.5
    end
    if speed < 5 then
    	speed+=0.05
    end
-		 //speed+=0.25
 		 if (round%10==0) then
 		 	speed-=0.40
    end
@@ -256,13 +256,15 @@ function _draw()
 		print("❎ or 🅾️ to start", 32, 88, 7)
 	 if (adj_speed) then
 			print("⬆️ or ⬇️ to change speed", 18, 94, 7)
-			for s=1,min(speed/0.2,12) do
-				sspr(24,0,16,16,18+((s-1)*8),110,8,8)
-			end
-			for s=13,min(speed/0.2,24) do
- 			sspr(24,0,16,16,18+((s-13)*8),118,8,8)
-	 	end
-
+			
+			if (speed==0) str="baby"
+			if (speed==1) str="normal"
+			if (speed==2) str="novice"
+			if (speed==3) str="hard"
+			if (speed==4) str="extreme"
+			if (speed==5) str="impossible"
+			
+			print(str.." start", 44-((#str+5)), 112, 0)
 		end
  end
  if state=="gameover" then
@@ -291,7 +293,7 @@ function _draw()
  if state=="ready" then
  	draw_cursor()
  end
- //debug=state
+ //debug=speed
 	//print(debug,5,5,0)
 	
 	// draw points area
