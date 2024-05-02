@@ -225,7 +225,7 @@ function _update60()
 		 state="reveal"
 		 round+=1
 		 if speed < 4 then
-		 	speed+=0.5
+		 	speed+=0.20
    end
    if speed < 5 then
    	speed+=0.05
